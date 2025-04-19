@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Harry Potter Movies</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 20px;
+      background-color: #f5f7fb;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    .movie-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+      gap: 30px;
+      padding: 20px;
+    }
+
+    .movie-card {
+      background: white;
+      border-radius: 16px;
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
+      overflow: hidden;
+      padding: 25px;
+      height: 520px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .movie-card img {
+      width: 100%;
+      height: 280px;
+      object-fit: cover;
+      border-radius: 12px;
+    }
+
+    .movie-card h2 {
+      margin-top: 15px;
+      font-size: 24px;
+      color: #5d2345;
+    }
+
+    .movie-card p {
+      margin-top: 10px;
+      font-size: 15px;
+      color: #333;
+    }
+
+    nav {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: #5d2345;
+      font-weight: bold;
+      margin: 0 15px;
+      font-size: 16px;
+    }
+
+    footer {
+      text-align: center;
+      margin-top: 40px;
+      color: #999;
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <a href="index.html">← Home</a>
+    <a href="hp-puzzles.html">Next → Harry Potter Puzzles</a>
+  </nav>
+
+  <header>
+    <h1>Harry Potter Movie Series</h1>
+    <p>Explore the magical journey of The Boy Who Lived through all eight enchanting films.</p>
+  </header>
+
+  <main class="movie-grid">
+    <!-- Sorcerer's Stone -->
+    <div class="movie-card">
+      <img src="https://img.englishcinemakyiv.com/5NKnk9edJU6YA0YVOVUJ5hcnWTKNg-ouc-w_mI6_u8M/resize:fill:800:450:1:0/gravity:sm/aHR0cHM6Ly9leHBhdGNpbmVtYXByb2QuYmxvYi5jb3JlLndpbmRvd3MubmV0L2ltYWdlcy9kYTA3MDljNC0zMGVlLTQ4YjEtOTJkYS03MWVmNzMyODg4MmIuanBn.jpg" alt="Sorcerer's Stone" />
+      <h2>Harry Potter and the Sorcerer's Stone (2001)</h2>
+      <p>Harry discovers he's a wizard and attends Hogwarts School of Witchcraft and Wizardry for the first time. He makes lifelong friends and faces the dark magic surrounding the Philosopher’s Stone.</p>
+    </div>
+
+    <!-- Chamber of Secrets -->
+    <div class="movie-card">
+      <img src="https://i.ytimg.com/vi/WYhm9Zwm7EQ/sddefault.jpg" alt="Chamber of Secrets" />
+      <h2>Harry Potter and the Chamber of Secrets (2002)</h2>
+      <p>As mysterious attacks paralyze students, Harry must uncover the secret behind the legendary Chamber of Secrets and face a deadly creature lurking within Hogwarts.</p>
+    </div>
+
+    <!-- Prisoner of Azkaban -->
+    <div class="movie-card">
+      <img src="https://alternativemovieposters.com/wp-content/uploads/2024/07/Chris-Valentine_Azkaban.jpg" alt="Prisoner of Azkaban" />
+      <h2>Harry Potter and the Prisoner of Azkaban (2004)</h2>
+      <p>Harry learns that Sirius Black, an escaped convict, may be linked to his parents' deaths. Secrets unfold as time travel and ancient magic reveal surprising truths.</p>
+    </div>
+
+    <!-- Goblet of Fire -->
+    <div class="movie-card">
+      <img src="https://harringtonbooks-co-uk.cdn.bibliopolis.com/pictures/63001.jpg?auto=webp&v=1664037704" alt="Goblet of Fire" />
+      <h2>Harry Potter and the Goblet of Fire (2005)</h2>
+      <p>Harry is unexpectedly entered into the dangerous Triwizard Tournament. As the challenges escalate, Voldemort returns in a terrifying climax that changes everything.</p>
+    </div>
+
+    <!-- Order of the Phoenix -->
+    <div class="movie-card">
+      <img src="https://upload.wikimedia.org/wikipedia/en/e/e7/Harry_Potter_and_the_Order_of_the_Phoenix_poster.jpg" alt="Order of the Phoenix" />
+      <h2>Harry Potter and the Order of the Phoenix (2007)</h2>
+      <p>With the Ministry of Magic in denial, Harry and friends form "Dumbledore’s Army" to fight back. The rise of Voldemort begins to fracture the wizarding world.</p>
+    </div>
+
+    <!-- Half-Blood Prince -->
+    <div class="movie-card">
+      <img src="https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcRmEWCMAR_SUEbl3RLJHIYw6quK9FIPGWOLtrssF67JlMIrSR3Yxq7gUJTl9QXeNjI3fOCb" alt="Half-Blood Prince" />
+      <h2>Harry Potter and the Half-Blood Prince (2009)</h2>
+      <p>As Voldemort’s power grows, Harry uncovers dark secrets about Tom Riddle’s past and the truth behind Horcruxes. A tragic loss rocks the school forever.</p>
+    </div>
+
+    <!-- Deathly Hallows Part 1 -->
+    <div class="movie-card">
+      <img src="https://upload.wikimedia.org/wikipedia/en/2/2d/Harry_Potter_and_the_Deathly_Hallows_%E2%80%93_Part_1.jpg" alt="Deathly Hallows Part 1" />
+      <h2>Harry Potter and the Deathly Hallows – Part 1 (2010)</h2>
+      <p>Harry, Ron, and Hermione go on the run to destroy Voldemort’s Horcruxes. Danger and betrayal abound in this darker, more desperate chapter of their journey.</p>
+    </div>
+
+    <!-- Deathly Hallows Part 2 -->
+    <div class="movie-card">
+      <img src="https://external-preview.redd.it/1k9v-9IcYMSjuQ3qt6IwMq_qINm5A1DiWdEATnNwWg4.jpg?width=1080&crop=smart&auto=webp&s=5e98993c126afb56932100f1bffbfcc2049d9346" alt="Deathly Hallows Part 2" />
+      <h2>Harry Potter and the Deathly Hallows – Part 2 (2011)</h2>
+      <p>The epic finale of the saga. The Battle of Hogwarts rages, secrets are revealed, and Harry makes the ultimate sacrifice to end Voldemort’s reign once and for all.</p>
+    </div>
+  </main>
+
+  <footer>
+    © 2025 Fiction & Fantasy Corner
+  </footer>
+</body>
+</html>

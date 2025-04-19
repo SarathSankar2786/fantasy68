@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Harry Potter Puzzles</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: url('https://i.pinimg.com/originals/cf/78/d5/cf78d52217b19faaf985c6e8f77215ef.gif') no-repeat center center fixed;
+      background-size: cover;
+      color: #fff;
+    }
+
+    .overlay {
+      background-color: rgba(0, 0, 0, 0.75);
+      min-height: 100vh;
+      padding: 40px 20px;
+    }
+
+    h1, h2 {
+      text-align: center;
+      color: #fdd835;
+    }
+
+    select {
+      display: block;
+      margin: 20px auto;
+      padding: 10px;
+      font-size: 16px;
+      border-radius: 6px;
+    }
+
+    .question-box {
+      background-color: rgba(255, 255, 255, 0.08);
+      border-radius: 12px;
+      padding: 20px;
+      margin: 20px auto;
+      max-width: 800px;
+    }
+
+    .question-box p {
+      font-size: 18px;
+    }
+
+    input[type="text"], select.answer-choice {
+      width: 100%;
+      padding: 8px;
+      font-size: 16px;
+      border-radius: 5px;
+      margin-top: 10px;
+    }
+
+    button {
+      margin-top: 20px;
+      padding: 10px 20px;
+      background-color: #fdd835;
+      color: black;
+      border: none;
+      border-radius: 6px;
+      font-weight: bold;
+      cursor: pointer;
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    button:hover {
+      background-color: #fbc02d;
+    }
+
+    .result {
+      text-align: center;
+      font-size: 20px;
+      color: #a5d6a7;
+      margin-top: 30px;
+    }
+
+    nav {
+      text-align: center;
+      margin-top: 40px;
+    }
+
+    nav a {
+      color: #fdd835;
+      text-decoration: none;
+      font-size: 18px;
+      font-weight: bold;
+      margin: 0 20px;
+    }
+
+    nav a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <div class="overlay">
+    <h1>Harry Potter Puzzles</h1>
+
+    <h2>Select a Movie:</h2>
+    <select id="movieSelect" onchange="loadQuestions()">
+      <option value="">-- Choose a Movie --</option>
+      <option value="sorcerer">1. Sorcerer's Stone</option>
+      <option value="chamber">2. Chamber of Secrets</option>
+      <option value="prisoner">3. Prisoner of Azkaban</option>
+      <option value="goblet">4. Goblet of Fire</option>
+      <option value="order">5. Order of the Phoenix</option>
+      <option value="half">6. Half-Blood Prince</option>
+      <option value="deathly1">7. Deathly Hallows Part 1</option>
+      <option value="deathly2">8. Deathly Hallows Part 2</option>
+    </select>
+
+    <form id="quizForm"></form>
+
+    <div class="result" id="result"></div>
+
+    <nav>
+      <a href="harrypotter.html">← Back</a>
+      <a href="index.html">🏠 Home</a>
+    </nav>
+  </div>
+
+  <script>
+    const quizData = {
+      sorcerer: [
+        { type: "mcq", question: "What magical object shows your deepest desire?", options: ["Mirror of Erised", "Time-Turner", "Pensieve", "Deluminator"], answer: "Mirror of Erised" },
+        { type: "fill", question: "Who is the Potions Master at Hogwarts in this movie?", answer: "Snape" },
+        { type: "mcq", question: "What is the name of the three-headed dog?", options: ["Fang", "Fluffy", "Norbert", "Scabbers"], answer: "Fluffy" },
+        { type: "fill", question: "The bank in the wizarding world is called ________.", answer: "Gringotts" },
+        { type: "mcq", question: "Which house did the Sorting Hat almost place Harry in?", options: ["Ravenclaw", "Slytherin", "Hufflepuff", "Beauxbatons"], answer: "Slytherin" }
+      ],
+      chamber: [
+        { type: "fill", question: "The creature that petrifies students is the ________.", answer: "Basilisk" },
+        { type: "mcq", question: "What magical item does Harry use to destroy the diary?", options: ["Wand", "Invisibility Cloak", "Basilisk Fang", "Sword of Gryffindor"], answer: "Basilisk Fang" },
+        { type: "mcq", question: "Who opened the Chamber of Secrets originally?", options: ["Salazar Slytherin", "Tom Riddle", "Draco Malfoy", "Lucius Malfoy"], answer: "Tom Riddle" },
+        { type: "fill", question: "Dobby tries to prevent Harry from going back to ________.", answer: "Hogwarts" },
+        { type: "mcq", question: "What does Tom Riddle use to control Ginny?", options: ["A necklace", "A ring", "A diary", "A wand"], answer: "A diary" }
+      ],
+      prisoner: [
+        { type: "mcq", question: "Who is revealed to be Harry’s godfather?", options: ["Sirius Black", "Remus Lupin", "James Potter", "Severus Snape"], answer: "Sirius Black" },
+        { type: "fill", question: "The creature used to transport the Dementors is called a ________.", answer: "Thestral" },
+        { type: "mcq", question: "Which magical map shows everyone at Hogwarts?", options: ["Marauder’s Map", "Daily Prophet", "Map of Mischief", "Forbidden Scroll"], answer: "Marauder’s Map" },
+        { type: "fill", question: "Hermione uses a ________ to attend multiple classes.", answer: "Time-Turner" },
+        { type: "mcq", question: "What is a Dementor’s most dangerous attack?", options: ["Memory Wipe", "Death Kiss", "Time Freeze", "Stupefy"], answer: "Death Kiss" }
+      ],
+      goblet: [
+        { type: "mcq", question: "Who puts Harry’s name into the Goblet of Fire?", options: ["Barty Crouch Jr.", "Voldemort", "Dumbledore", "Mad-Eye Moody"], answer: "Barty Crouch Jr." },
+        { type: "fill", question: "Harry fights a ________ dragon in the first task.", answer: "Hungarian Horntail" },
+        { type: "mcq", question: "Who dies at the end of the Triwizard Tournament?", options: ["Cedric Diggory", "Viktor Krum", "Fleur Delacour", "Neville Longbottom"], answer: "Cedric Diggory" },
+        { type: "fill", question: "The second task involves saving someone from the ________.", answer: "Black Lake" },
+        { type: "mcq", question: "What spell does Harry use to summon his broom?", options: ["Accio", "Lumos", "Alohomora", "Expelliarmus"], answer: "Accio" }
+      ],
+      order: [
+        { type: "fill", question: "Harry forms a secret group called ________.", answer: "Dumbledore’s Army" },
+        { type: "mcq", question: "Who is the new Defense Against the Dark Arts teacher?", options: ["Dolores Umbridge", "Severus Snape", "Gilderoy Lockhart", "Remus Lupin"], answer: "Dolores Umbridge" },
+        { type: "fill", question: "The prophecy is kept at the ________ Department.", answer: "Mysteries" },
+        { type: "mcq", question: "Who dies in the battle at the Department of Mysteries?", options: ["Sirius Black", "Luna Lovegood", "Neville Longbottom", "Kingsley Shacklebolt"], answer: "Sirius Black" },
+        { type: "mcq", question: "What creature pulls the carriages at Hogwarts?", options: ["Hippogriff", "Thestral", "Centaur", "Boggart"], answer: "Thestral" }
+      ],
+      half: [
+        { type: "mcq", question: "Who is the Half-Blood Prince?", options: ["Harry Potter", "Tom Riddle", "Severus Snape", "Horace Slughorn"], answer: "Severus Snape" },
+        { type: "fill", question: "The memory Harry retrieves from Slughorn is about a ________.", answer: "Horcrux" },
+        { type: "mcq", question: "Which spell does Harry use on Draco?", options: ["Sectumsempra", "Stupefy", "Expelliarmus", "Crucio"], answer: "Sectumsempra" },
+        { type: "fill", question: "Dumbledore is killed by ________.", answer: "Snape" },
+        { type: "mcq", question: "Who retrieves the real Horcrux locket before Harry?", options: ["Kreacher", "Mundungus Fletcher", "Regulus Black", "Aberforth Dumbledore"], answer: "Regulus Black" }
+      ],
+      deathly1: [
+        { type: "mcq", question: "What object is not one of the Deathly Hallows?", options: ["Elder Wand", "Resurrection Stone", "Deluminator", "Invisibility Cloak"], answer: "Deluminator" },
+        { type: "fill", question: "The story of the Deathly Hallows is told by ________.", answer: "Xenophilius Lovegood" },
+        { type: "mcq", question: "Who takes over the Ministry of Magic?", options: ["Voldemort", "Dolores Umbridge", "Yaxley", "Pius Thicknesse"], answer: "Pius Thicknesse" },
+        { type: "fill", question: "Harry, Ron, and Hermione are captured by ________ snatchers.", answer: "Scabior’s" },
+        { type: "mcq", question: "What creature helps Dobby and the others escape?", options: ["House-Elf", "Thestral", "Goblin", "Dragon"], answer: "House-Elf" }
+      ],
+      deathly2: [
+        { type: "fill", question: "The final battle takes place at ________.", answer: "Hogwarts" },
+        { type: "mcq", question: "Who destroys the final Horcrux?", options: ["Harry", "Neville", "Hermione", "Ron"], answer: "Neville" },
+        { type: "fill", question: "Harry speaks with ________ in the afterlife vision.", answer: "Dumbledore" },
+        { type: "mcq", question: "Whose wand does Harry break in the end?", options: ["Voldemort's", "Draco's", "Dumbledore's", "Elder Wand"], answer: "Elder Wand" },
+        { type: "fill", question: "Snape's true love was ________.", answer: "Lily Potter" }
+      ]
+    };
+
+    function loadQuestions() {
+      const selected = document.getElementById("movieSelect").value;
+      const form = document.getElementById("quizForm");
+      const result = document.getElementById("result");
+      result.innerHTML = "";
+      form.innerHTML = "";
+
+      if (quizData[selected]) {
+        quizData[selected].forEach((q, idx) => {
+          const box = document.createElement("div");
+          box.className = "question-box";
+
+          const label = document.createElement("p");
+          label.textContent = `${idx + 1}. ${q.question}`;
+          box.appendChild(label);
+
+          if (q.type === "mcq") {
+            const select = document.createElement("select");
+            select.className = "answer-choice";
+            select.name = `q${idx}`;
+            const defaultOption = document.createElement("option");
+            defaultOption.text = "-- Choose an option --";
+            defaultOption.disabled = true;
+            defaultOption.selected = true;
+            select.appendChild(defaultOption);
+            q.options.forEach(opt => {
+              const option = document.createElement("option");
+              option.value = opt;
+              option.text = opt;
+              select.appendChild(option);
+            });
+            box.appendChild(select);
+          } else if (q.type === "fill") {
+            const input = document.createElement("input");
+            input.type = "text";
+            input.name = `q${idx}`;
+            box.appendChild(input);
+          }
+
+          form.appendChild(box);
+        });
+
+        const submitBtn = document.createElement("button");
+        submitBtn.type = "button";
+        submitBtn.textContent = "Submit Answers";
+        submitBtn.onclick = () => checkAnswers(selected);
+        form.appendChild(submitBtn);
+      }
+    }
+
+    function checkAnswers(movie) {
+      const answers = quizData[movie];
+      let score = 0;
+
+      answers.forEach((q, idx) => {
+        const name = `q${idx}`;
+        const userInput = document.querySelector(`[name="${name}"]`);
+        const value = userInput.value.trim();
+
+        if (value.toLowerCase() === q.answer.toLowerCase()) {
+          score++;
+        }
+      });
+
+      document.getElementById("result").textContent = `You got ${score} out of ${answers.length} correct!`;
+    }
+  </script>
+</body>
+</html>

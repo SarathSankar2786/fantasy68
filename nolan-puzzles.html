@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Nolan Movie Puzzles</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: url('https://i.gifer.com/GOjH.gif') no-repeat center center fixed;
+      background-size: cover;
+      color: #ffffff;
+    }
+
+    .overlay {
+      background-color: rgba(0, 0, 0, 0.8);
+      min-height: 100vh;
+      padding: 40px 20px;
+    }
+
+    h1, h2 {
+      text-align: center;
+      color: #00e5ff;
+    }
+
+    select {
+      display: block;
+      margin: 20px auto;
+      padding: 10px;
+      font-size: 16px;
+      border-radius: 6px;
+    }
+
+    .question-box {
+      background-color: rgba(255, 255, 255, 0.07);
+      border-radius: 12px;
+      padding: 20px;
+      margin: 20px auto;
+      max-width: 800px;
+    }
+
+    .question-box p {
+      font-size: 18px;
+    }
+
+    input[type="text"], select.answer-choice {
+      width: 100%;
+      padding: 8px;
+      font-size: 16px;
+      border-radius: 5px;
+      margin-top: 10px;
+    }
+
+    button {
+      margin-top: 20px;
+      padding: 10px 20px;
+      background-color: #00e5ff;
+      color: black;
+      border: none;
+      border-radius: 6px;
+      font-weight: bold;
+      cursor: pointer;
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    button:hover {
+      background-color: #00bcd4;
+    }
+
+    .result {
+      text-align: center;
+      font-size: 20px;
+      color: #c5e1a5;
+      margin-top: 30px;
+    }
+
+    nav {
+      text-align: center;
+      margin-top: 40px;
+    }
+
+    nav a {
+      color: #00e5ff;
+      text-decoration: none;
+      font-size: 18px;
+      font-weight: bold;
+      margin: 0 20px;
+    }
+
+    nav a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <div class="overlay">
+    <h1>Christopher Nolan Movie Puzzles</h1>
+
+    <h2>Select a Movie:</h2>
+    <select id="movieSelect" onchange="loadQuestions()">
+      <option value="">-- Choose a Movie --</option>
+      <option value="following">Following</option>
+      <option value="memento">Memento</option>
+      <option value="insomnia">Insomnia</option>
+      <option value="batmanbegins">Batman Begins</option>
+      <option value="prestige">The Prestige</option>
+      <option value="darkknight">The Dark Knight</option>
+      <option value="darkknightrises">The Dark Knight Rises</option>
+      <option value="inception">Inception</option>
+      <option value="interstellar">Interstellar</option>
+      <option value="dunkirk">Dunkirk</option>
+      <option value="tenet">Tenet</option>
+      <option value="oppenheimer">Oppenheimer</option>
+    </select>
+
+    <form id="quizForm"></form>
+    <div class="result" id="result"></div>
+
+    <nav>
+      <a href="nolan.html">← Back</a>
+      <a href="index.html">🏠 Home</a>
+    </nav>
+  </div>
+
+  <script>
+    const quizData = {
+      following: [
+        { type: "fill", question: "Who is the main character in 'Following'?", answer: "The Young Man" },
+        { type: "mcq", question: "What profession is the main character aspiring to?", options: ["Writer", "Detective", "Director", "Artist"], answer: "Writer" },
+        { type: "fill", question: "Who manipulates the protagonist in the film?", answer: "Cobb" },
+        { type: "mcq", question: "What is the main narrative technique used in the movie?", options: ["Flashbacks", "Linear storyline", "Non-linear editing", "Real-time narration"], answer: "Non-linear editing" },
+        { type: "mcq", question: "Which year was 'Following' released?", options: ["1998", "2000", "2001", "1996"], answer: "1998" }
+      ],
+      memento: [
+        { type: "fill", question: "What condition does Leonard suffer from?", answer: "Short-term memory loss" },
+        { type: "mcq", question: "What is the name of the person Leonard is looking for?", options: ["Sammy", "John G", "Teddy", "Natalie"], answer: "John G" },
+        { type: "mcq", question: "Leonard uses which of these to remember clues?", options: ["Photos", "Notebook", "Tattoos", "Voice Memos"], answer: "Tattoos" },
+        { type: "fill", question: "The movie is told in a ________ timeline.", answer: "Nonlinear" },
+        { type: "mcq", question: "Who directed Memento?", options: ["Christopher Nolan", "Jonathan Nolan", "Steven Spielberg", "David Fincher"], answer: "Christopher Nolan" }
+      ],
+      insomnia: [
+        { type: "fill", question: "What is the main setting of 'Insomnia'?", answer: "A small town in Alaska" },
+        { type: "mcq", question: "Who plays the lead role of Detective Dormer?", options: ["Al Pacino", "Robin Williams", "Matthew McConaughey", "Keanu Reeves"], answer: "Al Pacino" },
+        { type: "mcq", question: "Who is the murderer in the movie?", options: ["Will Dormer", "Walter Finch", "Edgar", "Dr. Angela"], answer: "Walter Finch" },
+        { type: "fill", question: "Which crime does Detective Dormer investigate?", answer: "A murder" },
+        { type: "mcq", question: "Which year was 'Insomnia' released?", options: ["2002", "2001", "2000", "1999"], answer: "2002" }
+      ],
+      batmanbegins: [
+        { type: "mcq", question: "Who plays Batman in 'Batman Begins'?", options: ["Christian Bale", "Michael Keaton", "Ben Affleck", "George Clooney"], answer: "Christian Bale" },
+        { type: "fill", question: "Which villain does Batman fight in 'Batman Begins'?", answer: "Ra's al Ghul" },
+        { type: "mcq", question: "What is the name of Bruce Wayne's butler?", options: ["Alfred Pennyworth", "Jarvis", "James Gordon", "Lucius Fox"], answer: "Alfred Pennyworth" },
+        { type: "fill", question: "Who trains Bruce Wayne in the League of Shadows?", answer: "Ra's al Ghul" },
+        { type: "mcq", question: "Which company is owned by Bruce Wayne?", options: ["Wayne Enterprises", "Wayne Corp", "Wayne Inc", "Wayne Tech"], answer: "Wayne Enterprises" }
+      ],
+      prestige: [
+        { type: "mcq", question: "Who stars as Robert Angier in 'The Prestige'?", options: ["Hugh Jackman", "Christian Bale", "Edward Norton", "Johnny Depp"], answer: "Hugh Jackman" },
+        { type: "fill", question: "Which illusion is a key part of 'The Prestige'?", answer: "The Transported Man" },
+        { type: "mcq", question: "What is the main rivalry in 'The Prestige'?", options: ["Angier vs. Borden", "Borden vs. Cutter", "Angier vs. Tesla", "Borden vs. Tesla"], answer: "Angier vs. Borden" },
+        { type: "fill", question: "Which character is a famous inventor in the film?", answer: "Nikola Tesla" },
+        { type: "mcq", question: "What is the final twist in 'The Prestige'?", options: ["Angier dies", "Borden is twins", "Tesla's machine works", "Cutter is the real magician"], answer: "Borden is twins" }
+      ],
+      darkknight: [
+        { type: "mcq", question: "Who plays the Joker in 'The Dark Knight'?", options: ["Heath Ledger", "Jack Nicholson", "Jared Leto", "Tom Hardy"], answer: "Heath Ledger" },
+        { type: "fill", question: "What is the Joker's real plan in 'The Dark Knight'?", answer: "To create chaos" },
+        { type: "mcq", question: "Who is Harvey Dent before becoming Two-Face?", options: ["District Attorney", "Police Commissioner", "Judge", "Coroner"], answer: "District Attorney" },
+        { type: "fill", question: "What is the device used by the Joker to destroy Gotham's symbol?", answer: "The sonar system" },
+        { type: "mcq", question: "Which Batman film was released after 'The Dark Knight'?", options: ["The Dark Knight Rises", "Batman Begins", "Inception", "Interstellar"], answer: "The Dark Knight Rises" }
+      ],
+      darkknightrises: [
+        { type: "mcq", question: "Who plays Bane in 'The Dark Knight Rises'?", options: ["Tom Hardy", "Christian Bale", "Heath Ledger", "Joseph Gordon-Levitt"], answer: "Tom Hardy" },
+        { type: "fill", question: "Which city is threatened by Bane in the film?", answer: "Gotham City" },
+        { type: "mcq", question: "Which character becomes a symbol of hope after Batman is missing?", options: ["John Blake", "Commissioner Gordon", "Lucius Fox", "Alfred Pennyworth"], answer: "John Blake" },
+        { type: "fill", question: "Who is revealed to be Talia al Ghul in 'The Dark Knight Rises'?", answer: "Miranda Tate" },
+        { type: "mcq", question: "What is the name of the prison where Bruce Wayne is held?", options: ["The Pit", "The Dungeon", "The Hole", "Blackgate"], answer: "The Pit" }
+      ],
+      inception: [
+        { type: "mcq", question: "What is the main theme of 'Inception'?", options: ["Dream manipulation", "Time travel", "Reality distortion", "Parallel universes"], answer: "Dream manipulation" },
+        { type: "fill", question: "What is the device used for entering dreams?", answer: "The Spinner" },
+        { type: "mcq", question: "Who plays the lead role of Dom Cobb?", options: ["Leonardo DiCaprio", "Tom Hardy", "Joseph Gordon-Levitt", "Cillian Murphy"], answer: "Leonardo DiCaprio" },
+        { type: "mcq", question: "What is the object used to test if someone is in a dream?", options: ["A top", "A totem", "A mirror", "A ring"], answer: "A totem" },
+        { type: "fill", question: "What year was 'Inception' released?", answer: "2010" }
+      ],
+      interstellar: [
+        { type: "mcq", question: "What is the main setting of 'Interstellar'?", options: ["A dystopian Earth", "A space station", "A distant planet", "A parallel universe"], answer: "A dystopian Earth" },
+        { type: "fill", question: "Which character is a scientist and engineer in 'Interstellar'?", answer: "Cooper" },
+        { type: "mcq", question: "Who plays Dr. Brand in 'Interstellar'?", options: ["Anne Hathaway", "Jessica Chastain", "Marion Cotillard", "Ellen Burstyn"], answer: "Anne Hathaway" },
+        { type: "mcq", question: "What is the name of the black hole in 'Interstellar'?", options: ["Gargantua", "Tesseract", "Blackhole Alpha", "Singularity"], answer: "Gargantua" },
+        { type: "fill", question: "Which concept is central to 'Interstellar'?", answer: "Time dilation" }
+      ],
+      dunkirk: [
+        { type: "mcq", question: "What year was 'Dunkirk' set?", options: ["1940", "1945", "1939", "1944"], answer: "1940" },
+        { type: "fill", question: "In 'Dunkirk', which military operation is depicted?", answer: "Operation Dynamo" },
+        { type: "mcq", question: "Who plays the role of Tommy in 'Dunkirk'?", options: ["Fionn Whitehead", "Harry Styles", "Mark Rylance", "Tom Hardy"], answer: "Fionn Whitehead" },
+        { type: "mcq", question: "Who directed 'Dunkirk'?", options: ["Christopher Nolan", "Steven Spielberg", "Martin Scorsese", "Ridley Scott"], answer: "Christopher Nolan" },
+        { type: "fill", question: "What is the key challenge in 'Dunkirk'?", answer: "Evacuation" }
+      ],
+      tenet: [
+        { type: "mcq", question: "What is the central concept of 'Tenet'?", options: ["Time inversion", "Time travel", "Parallel universes", "Quantum entanglement"], answer: "Time inversion" },
+        { type: "fill", question: "Which character is played by John David Washington?", answer: "The Protagonist" },
+        { type: "mcq", question: "Who plays Neil in 'Tenet'?", options: ["Robert Pattinson", "Michael Caine", "Kenneth Branagh", "John David Washington"], answer: "Robert Pattinson" },
+        { type: "mcq", question: "Which element is key to understanding the time inversion in 'Tenet'?", options: ["Entropy", "Gravity", "Sound waves", "Light speed"], answer: "Entropy" },
+        { type: "fill", question: "What is the final goal in 'Tenet'?", answer: "Prevent the end of the world" }
+      ],
+      oppenheimer: [
+        { type: "mcq", question: "Who plays J. Robert Oppenheimer?", options: ["Cillian Murphy", "Matt Damon", "Tom Hardy", "John C. Reilly"], answer: "Cillian Murphy" },
+        { type: "fill", question: "In 'Oppenheimer', the main character is best known for inventing the ________.", answer: "Atomic bomb" },
+        { type: "mcq", question: "Who directed 'Oppenheimer'?", options: ["Christopher Nolan", "Steven Spielberg", "James Cameron", "Martin Scorsese"], answer: "Christopher Nolan" },
+        { type: "mcq", question: "What year is 'Oppenheimer' set in?", options: ["1940s", "1930s", "1920s", "1950s"], answer: "1940s" },
+        { type: "fill", question: "What significant historical event is central to 'Oppenheimer'?", answer: "The Manhattan Project" }
+      ]
+    };
+
+    function loadQuestions() {
+      const selectedMovie = document.getElementById("movieSelect").value;
+      if (selectedMovie) {
+        const questions = quizData[selectedMovie];
+        const quizForm = document.getElementById("quizForm");
+        quizForm.innerHTML = '';
+        questions.forEach((q, index) => {
+          let questionElement;
+          if (q.type === 'fill') {
+            questionElement = `
+              <div class="question-box">
+                <p>${index + 1}. ${q.question}</p>
+                <input type="text" id="answer${index}" class="answer-choice" placeholder="Your answer" />
+              </div>
+            `;
+          } else if (q.type === 'mcq') {
+            const options = q.options.map((option, i) => {
+              return `<option value="${option}">${option}</option>`;
+            }).join('');
+            questionElement = `
+              <div class="question-box">
+                <p>${index + 1}. ${q.question}</p>
+                <select id="answer${index}" class="answer-choice">
+                  ${options}
+                </select>
+              </div>
+            `;
+          }
+          quizForm.innerHTML += questionElement;
+        });
+
+        const submitButton = `
+          <button type="button" onclick="checkAnswers()">Check Answers</button>
+        `;
+        quizForm.innerHTML += submitButton;
+      }
+    }
+
+    function checkAnswers() {
+      const selectedMovie = document.getElementById("movieSelect").value;
+      const questions = quizData[selectedMovie];
+      let score = 0;
+
+      questions.forEach((q, index) => {
+        const userAnswer = document.getElementById(`answer${index}`).value.trim();
+        const correctAnswer = q.answer;
+
+        if (userAnswer.toLowerCase() === correctAnswer.toLowerCase()) {
+          score++;
+        }
+      });
+
+      const resultElement = document.getElementById("result");
+      resultElement.innerHTML = `You scored ${score} out of ${questions.length}!`;
+    }
+  </script>
+</body>
+</html>

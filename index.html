@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Fiction and Fantasy Corner</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-image: url('images/background.jpg');
+      background-size: cover;
+      background-position: center;
+      color: white;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    .overlay {
+      background-color: rgba(0, 0, 0, 0.6);
+      width: 100%;
+      min-height: 100vh;
+      padding: 40px 20px;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    header h1 {
+      font-size: 48px;
+      font-weight: bold;
+      margin-bottom: 10px;
+      color: #fdd835;
+    }
+
+    header p {
+      font-size: 20px;
+      color: #eee;
+    }
+
+    .slideshow-container {
+      max-width: 1000px;
+      margin: auto;
+      position: relative;
+    }
+
+    .slide {
+      display: none;
+      position: relative;
+      text-align: center;
+      padding: 20px;
+      border-radius: 16px;
+      background-color: rgba(255, 255, 255, 0.05);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+    }
+
+    .slide img {
+      width: 100%;
+      max-height: 400px;
+      object-fit: cover;
+      border-radius: 12px;
+    }
+
+    .slide a {
+      display: inline-block;
+      margin-top: 20px;
+      padding: 12px 24px;
+      background-color: #fdd835;
+      color: #000;
+      text-decoration: none;
+      border-radius: 8px;
+      font-weight: bold;
+      transition: background-color 0.3s ease;
+    }
+
+    .slide a:hover {
+      background-color: #fbc02d;
+    }
+
+    .prev, .next {
+      cursor: pointer;
+      position: absolute;
+      top: 45%;
+      width: auto;
+      padding: 16px;
+      color: white;
+      font-weight: bold;
+      font-size: 24px;
+      transition: 0.3s ease;
+      user-select: none;
+    }
+
+    .prev {
+      left: 0;
+    }
+
+    .next {
+      right: 0;
+    }
+
+    .dot-container {
+      text-align: center;
+      margin-top: 20px;
+    }
+
+    .dot {
+      height: 12px;
+      width: 12px;
+      margin: 0 5px;
+      background-color: #bbb;
+      border-radius: 50%;
+      display: inline-block;
+      transition: background-color 0.3s;
+    }
+
+    .active {
+      background-color: #fdd835;
+    }
+
+    section {
+      margin-top: 60px;
+    }
+
+    section h2 {
+      text-align: center;
+      color: #fdd835;
+      margin-bottom: 30px;
+      font-size: 28px;
+    }
+
+    .quote-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 30px;
+      padding: 0 20px;
+    }
+
+    .quote-box {
+      max-width: 300px;
+      background-color: rgba(255, 255, 255, 0.08);
+      border-radius: 12px;
+      padding: 20px;
+      text-align: center;
+      color: #fff;
+    }
+
+    .quote-box img {
+      width: 100%;
+      border-radius: 8px;
+      margin-bottom: 15px;
+    }
+
+    .quote-box p {
+      font-size: 16px;
+    }
+  </style>
+</head>
+<body>
+  <div class="overlay">
+    <header>
+      <h1>Fiction and Fantasy Corner</h1>
+      <p>Explore the worlds of magic and mind-bending mystery</p>
+    </header>
+
+    <div class="slideshow-container">
+      <div class="slide fade">
+        <img src="images/home_hp.jpg" alt="Harry Potter" />
+        <a href="harrypotter.html">Explore Harry Potter</a>
+      </div>
+
+      <div class="slide fade">
+        <img src="images/home_nolan.jpg" alt="Christopher Nolan" />
+        <a href="nolan.html">Explore Nolan Movies</a>
+      </div>
+
+      <div class="slide fade">
+        <img src="images/home_hp_puzzle.jpg" alt="Harry Potter Puzzles" />
+        <a href="hp-puzzles.html">Harry Potter Puzzles</a>
+      </div>
+
+      <div class="slide fade">
+        <img src="images/home_nolan_puzzle.jpg" alt="Nolan Puzzles" />
+        <a href="nolan-puzzles.html">Christopher Nolan Puzzles</a>
+      </div>
+
+      <a class="prev" onclick="plusSlides(-1)">❮</a>
+      <a class="next" onclick="plusSlides(1)">❯</a>
+    </div>
+
+    <div class="dot-container">
+      <span class="dot" onclick="currentSlide(1)"></span>
+      <span class="dot" onclick="currentSlide(2)"></span>
+      <span class="dot" onclick="currentSlide(3)"></span>
+      <span class="dot" onclick="currentSlide(4)"></span>
+    </div>
+
+    <!-- Quote Gallery -->
+    <section>
+      <h2>Magic & Mystery Moments</h2>
+      <div class="quote-container">
+        <div class="quote-box">
+          <img src="images/quote_hp.jpg" alt="HP Quote" />
+          <p><em>“Happiness can be found even in the darkest of times, if one only remembers to turn on the light.”</em></p>
+          <p style="margin-top: 10px;">– Albus Dumbledore</p>
+        </div>
+        <div class="quote-box">
+          <img src="images/quote_nolan.jpg" alt="Nolan Quote" />
+          <p><em>“You mustn’t be afraid to dream a little bigger, darling.”</em></p>
+          <p style="margin-top: 10px;">– <i>Inception</i></p>
+        </div>
+        <div class="quote-box">
+          <img src="images/quote_hp2.jpg" alt="HP Quote 2" />
+          <p><em>“It is our choices, Harry, that show what we truly are, far more than our abilities.”</em></p>
+          <p style="margin-top: 10px;">– Albus Dumbledore</p>
+        </div>
+        <div class="quote-box">
+          <img src="images/quote_nolan2.jpg" alt="Nolan Quote 2" />
+          <p><em>“Do not go gentle into that good night.”</em></p>
+          <p style="margin-top: 10px;">– <i>Interstellar</i></p>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <script>
+    let slideIndex = 1;
+    showSlides(slideIndex);
+
+    function plusSlides(n) {
+      showSlides(slideIndex += n);
+    }
+
+    function currentSlide(n) {
+      showSlides(slideIndex = n);
+    }
+
+    function showSlides(n) {
+      let i;
+      const slides = document.getElementsByClassName("slide");
+      const dots = document.getElementsByClassName("dot");
+
+      if (n > slides.length) slideIndex = 1;
+      if (n < 1) slideIndex = slides.length;
+
+      for (i = 0; i < slides.length; i++) {
+        slides[i].style.display = "none";
+      }
+
+      for (i = 0; i < dots.length; i++) {
+        dots[i].className = dots[i].className.replace(" active", "");
+      }
+
+      slides[slideIndex - 1].style.display = "block";
+      dots[slideIndex - 1].className += " active";
+    }
+
+    // Optional auto-slide
+    setInterval(() => plusSlides(1), 7000);
+  </script>
+</body>
+</html>
